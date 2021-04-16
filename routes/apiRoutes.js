@@ -7,6 +7,7 @@
 // const waitListData = require('../data/waitinglistData');
 
 // ROUTING
+const notesData = []
 const express = require("express")
 const textData = [{
   title: "Test Title",
@@ -14,15 +15,14 @@ const textData = [{
 }];
 module.exports = (app) => {
   // Sets up the Express app to handle data parsing
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+
   // API GET Requests
   // Below code handles when users "visit" a page.
   // In each of the below cases when a user visits a link
   // (ex: localhost:PORT/api/admin... they are shown a JSON of the data in the table)
   // ---------------------------------------------------------------------------
 
-  app.get("/api/notes", (req, res) => res.json(textData));
+  app.get("/api/notes", (req, res) => res.json(notesData));
 
   // app.get("/api/waitlist", (req, res) => res.json(waitListData));
 
@@ -41,6 +41,7 @@ app.use(express.json());
     if (notesData.length < 5) {
       notesData.push(req.body);
       res.json(true);
+      console.log(notesData)
     } else {
       return res.json(false);
     }
